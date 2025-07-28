@@ -1,28 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import logo from "@/assets/images/logo.png";
 
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
+  navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
     <div className="container">
       <NavigationMenu viewport={false} className="min-w-full py-5">
-        <NavigationMenuList className="justify-between">
+        <ul className="flex justify-between items-center w-full">
           <div className="flex gap-[31px]">
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/supplement">SUPPLEMENT</Link>
+                <Link
+                  href="/supplement"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
+                  SUPPLEMENT
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -30,7 +36,9 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/laser">LASER</Link>
+                <Link href="/laser" className="text-[10px] tracking-[1.68px] text-black/30">
+                  LASER
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -38,7 +46,9 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/reviews">REVIEWS</Link>
+                <Link href="/reviews" className="text-[10px] tracking-[1.68px] text-black/30">
+                  REVIEWS
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -46,7 +56,9 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/journal">JOURNAL</Link>
+                <Link href="/journal" className="text-[10px] tracking-[1.68px] text-black/30">
+                  JOURNAL
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -54,20 +66,24 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/about">ABOUT</Link>
+                <Link href="/about" className="text-[10px] tracking-[1.68px] text-black/30">
+                  ABOUT
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </div>
           <Link href="/">
-            <h2 className="text-3xl">ETMA</h2>
+            <Image src={logo} alt="logo" width={100} height={100} />
           </Link>
-          <div className="flex gap-[31px]">
+          <div className="flex gap-[31px] items-center">
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/support">HELP & SUPPORT</Link>
+                <Link href="/support" className="text-[10px] tracking-[1.68px] text-black/30">
+                  HELP & SUPPORT
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -75,7 +91,12 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/activate">ACTIVATE</Link>
+                <Link
+                  href="/activate"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
+                  ACTIVATE
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -83,12 +104,16 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/account">ACCOUNT</Link>
+                <Link href="/account" className="text-[10px] tracking-[1.68px] text-black/30">
+                  ACCOUNT
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <Button>BUY</Button>
+            <Button className="bg-black text-white min-w-[64px] h-[23px] rounded-none">
+              <span className="text-[10px] tracking-[1.68px]">BUY</span>
+            </Button>
           </div>
-        </NavigationMenuList>
+        </ul>
       </NavigationMenu>
     </div>
   );
