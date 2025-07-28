@@ -1,18 +1,19 @@
-import hero from "@/assets/images/hero.jpg";
+
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 interface HeroProps {
   title: string;
-  description: string;
+  description?: string;
+  image: string | StaticImageData;
 }
 
-export default function Hero({ title, description }: HeroProps) {
+export default function Hero({ title, description, image }: HeroProps) {
   return (
     <div className="flex flex-col items-center justify-center relative w-full h-[100vh]">
       <Image
-        src={hero}
+        src={image}
         alt="hero"
         className="absolute top-0 left-0 w-[100vw] h-[100vh] object-cover z-0"
       />
