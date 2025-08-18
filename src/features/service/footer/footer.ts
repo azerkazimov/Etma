@@ -4,27 +4,27 @@ export const footer = [
         links: [
             {
                 title: "Benefits",
-                href: "/benefits"
+                href: "/footer/benefits"
             },
             {
                 title: "Formula",
-                href: "/formula"
+                href: "/footer/formula"
             },
             {
                 title: "Immunity",
-                href: "/immunity"
+                href: "/footer/immunity"
             },
             {
                 title: "Journal",
-                href: "/journal"
+                href: "/footer/journal"
             },
             {
                 title: "Reviews",
-                href: "/reviews"
+                href: "/footer/reviews"
             },
             {
                 title: "Buy",
-                href: "/buy"
+                href: "/footer/buy"
             }
         ]
     },
@@ -33,35 +33,35 @@ export const footer = [
         links: [
             {
                 title: "LYMA Laser",
-                href: "/lyma-laser"
+                href: "/footer/lyma-laser"
             },
             {
                 title: "Active Mist",
-                href: "/active-mist"
+                href: "/footer/active-mist"
             },
             {
                 title: "Priming Serum",
-                href: "/priming-serum"
+                href: "/footer/priming-serum"
             },
             {
                 title: "Technology",
-                href: "/technology"
+                href: "/footer/technology"
             },
             {
                 title: "Results",
-                href: "/results"
+                href: "/footer/results"
             },
             {
                 title: "Journal",
-                href: "/journal"
+                href: "/footer/journal"
             },
             {
                 title: "Reviews",
-                href: "/reviews"
+                href: "/footer/reviews"
             },
             {
                 title: "Buy",
-                href: "/buy"
+                href: "/footer/buy"
             }
         ]
     },
@@ -70,31 +70,31 @@ export const footer = [
         links: [
             {
                 title: "About",
-                href: "/about"
+                href: "/footer/about"
             },
             {
                 title: "Journal",
-                href: "/journal"
+                href: "/footer/journal"
             },
             {
                 title: "FAQs",
-                href: "/faqs"
+                href: "/footer/faqs"
             },
             {
                 title: "Contact",
-                href: "/contact"
+                href: "/footer/contact"
             },
             {
                 title: "Terms",
-                href: "/terms"
+                href: "/footer/terms"
             },
             {
                 title: "Privacy",
-                href: "/privacy"
+                href: "/footer/privacy"
             },
             {
                 title: "Warranty",
-                href: "/warranty"
+                href: "/footer/warranty"
             }
         ]
     },
@@ -103,31 +103,31 @@ export const footer = [
         links: [
             {
                 title: "Activate",
-                href: "/activate"
+                href: "/footer/activate"
             },
             {
                 title: "My subscription",
-                href: "/my-subscription"
+                href: "/footer/my-subscription"
             },
             {
                 title: "Add extras",
-                href: "/add-extras"
+                href: "/footer/add-extras"
             },
             {
                 title: "My orders",
-                href: "/my-orders"
+                href: "/footer/my-orders"
             },
             {
                 title: "Account details",
-                href: "/account-details"
+                href: "/footer/account-details"
             },
             {
                 title: "Payment method",
-                href: "/payment-method"
+                href: "/footer/payment-method"
             },
             {
                 title: "Login details",
-                href: "/login-details"
+                href: "/footer/login-details"
             }
         ]
     },

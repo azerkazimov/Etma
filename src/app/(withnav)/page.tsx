@@ -3,6 +3,7 @@ import Discover from "@/features/pages/main/component/discover";
 import Hero from "@/features/pages/main/component/hero";
 import hero from "@/assets/images/hero.jpg";
 import innovation from "@/assets/images/innovation.jpg";
+import Founder from "@/features/pages/main/component/founder";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         image={innovation}
         title="Wellness innovation at its scientific best."
       />
+      <Founder />
     </>
   );
 }

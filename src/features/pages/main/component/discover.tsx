@@ -37,7 +37,7 @@ export default function Discover() {
             <p className="text-[16px]">A new dawn for beauty.</p>
           </div>
           <div className="flex gap-[125px]">
-            <Link href="/supplement" className="text-[14px] tracking-[2px] hover:font-bold uppercase">Discover</Link>
+            <Link href="/laser" className="text-[14px] tracking-[2px] hover:font-bold uppercase">Discover</Link>
             <Link href="/" className="text-[14px] tracking-[2px] hover:font-bold uppercase">Buy</Link>
           </div>
         </div>
