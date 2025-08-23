@@ -4,6 +4,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthProvider from "@/features/shared/providers/auth-provider";
+import Provider from "@/features/shared/providers/main-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,20 +26,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let session = null;
-  
-  try {
-    session = await getServerSession(authOptions);
-  } catch (error) {
-    console.error("Session error:", error);
-  }
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider session={session}>{children}</AuthProvider>
+        <AuthProvider session={session}>
+          <Provider>{children}</Provider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,52 +1,49 @@
-"use client"
+"use client";
 
-import { useSearchParams } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
-export default function AuthError() {
-  const searchParams = useSearchParams()
-  const error = searchParams.get("error")
+export default function AuthErrorPage() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   const getErrorMessage = (error: string | null) => {
     switch (error) {
       case "Configuration":
-        return "There is a problem with the server configuration."
+        return "There is a problem with the server configuration.";
       case "AccessDenied":
-        return "Access denied. You do not have permission to sign in."
+        return "Access denied. You do not have permission to sign in.";
       case "Verification":
-        return "The verification token has expired or has already been used."
+        return "The verification token has expired or has already been used.";
       case "Default":
-        return "An error occurred during authentication."
+        return "An error occurred during authentication.";
       default:
-        return "An unexpected error occurred."
+        return "An unknown error occurred.";
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+    <div className="flex h-screen items-center justify-center">
+      <Card className="w-[400px]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-semibold text-red-600">
             Authentication Error
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            {getErrorMessage(error)}
-          </p>
-        </div>
-        <div className="space-y-4">
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-gray-600">{getErrorMessage(error)}</p>
+          {error && (
+            <div className="bg-gray-100 p-3 rounded-md">
+              <p className="text-sm text-gray-500">Error code: {error}</p>
+            </div>
+          )}
           <Button asChild className="w-full">
-            <Link href="/auth/login">
-              Try Again
-            </Link>
+            <Link href="/auth/login">Try Again</Link>
           </Button>
-          <Button variant="outline" asChild className="w-full">
-            <Link href="/">
-              Go Home
-            </Link>
-          </Button>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }

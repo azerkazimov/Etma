@@ -1,0 +1,1 @@
+1. Fix next-auth by github
