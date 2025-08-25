@@ -1,4 +1,8 @@
+
 import { Episode } from "@/features/interface/journal";
+import AddToCardButton from "@/features/shared/add-to-card-button";
+
+
 
 
 interface JournalCardProps {
@@ -6,6 +10,7 @@ interface JournalCardProps {
 }
 
 export default async function JournalCard({ id }: JournalCardProps) {
+ 
   try {
     const response = await fetch(`https://rickandmortyapi.com/api/episode/${id}`);
     
@@ -16,7 +21,7 @@ export default async function JournalCard({ id }: JournalCardProps) {
     const data: Episode = await response.json();
 
     return (
-      <div className="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
+      <div className="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer relative">
         <h3 className="font-bold text-lg mb-2">{data.name}</h3>
         <p className="text-gray-600 mb-1">Air Date: {data.air_date}</p>
         <p className="text-gray-600 mb-1">Episode: {data.episode}</p>
@@ -28,6 +33,7 @@ export default async function JournalCard({ id }: JournalCardProps) {
             Created: {new Date(data.created).toLocaleDateString()}
           </p>
         )}
+        <AddToCardButton data={data} />
       </div>
     );
   } catch (error) {

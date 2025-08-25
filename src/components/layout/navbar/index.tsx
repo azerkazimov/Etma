@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import ProfileButton from "@/features/shared/profile-button";
+import { Sidebar } from "@/features/shared/sidebar";
 
 export default function Navbar() {
   const session = useSession();
@@ -132,23 +134,8 @@ export default function Navbar() {
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            {session.status === "authenticated" ? (
-              <Link href="/dashboard">
-                <Image
-                  src={session.data?.user?.image || ""}
-                  alt="avatar"
-                  width={64}
-                  height={64}
-                  className="rounded-full border border-black/10"
-                />
-              </Link>
-            ) : (
-              <Link href="/auth/signin">
-                <Button className="bg-black text-white min-w-[64px] h-[23px] rounded-none cursor-pointer">
-                  <span className="text-[10px] tracking-[1.68px]">LOGIN</span>
-                </Button>
-              </Link>
-            )}
+
+            <ProfileButton />
           </div>
         </ul>
       </NavigationMenu>
