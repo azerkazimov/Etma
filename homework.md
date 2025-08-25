@@ -1,1 +1,1 @@
-1. Fix next-auth by github
+1. Написать аутентефикацию c помощью NextAuth & Prisma orm

@@ -13,11 +13,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
+
 
 export default function SignIn() {
   const session = useSession();
 
   console.log(session);
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -28,7 +32,9 @@ export default function SignIn() {
             Enter your email below to login to your account
           </CardDescription>
           <CardAction>
-            <Button variant="link">Sign Up</Button>
+            <Link href="/auth/signup">
+              <Button variant="link">Sign Up</Button>
+            </Link>
           </CardAction>
         </CardHeader>
         <CardContent>
@@ -53,7 +59,11 @@ export default function SignIn() {
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                />
               </div>
             </div>
           </form>

@@ -8,11 +8,16 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
-  navigationMenuTriggerStyle
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
+  const session = useSession();
+
+  console.log(session);
+
   return (
     <div className="container">
       <NavigationMenu viewport={false} className="min-w-full py-5">
@@ -36,7 +41,10 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/laser" className="text-[10px] tracking-[1.68px] text-black/30">
+                <Link
+                  href="/laser"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
                   LASER
                 </Link>
               </NavigationMenuLink>
@@ -46,7 +54,10 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/reviews" className="text-[10px] tracking-[1.68px] text-black/30">
+                <Link
+                  href="/reviews"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
                   REVIEWS
                 </Link>
               </NavigationMenuLink>
@@ -56,7 +67,10 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/journal" className="text-[10px] tracking-[1.68px] text-black/30">
+                <Link
+                  href="/journal"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
                   JOURNAL
                 </Link>
               </NavigationMenuLink>
@@ -66,7 +80,10 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/about" className="text-[10px] tracking-[1.68px] text-black/30">
+                <Link
+                  href="/about"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
                   ABOUT
                 </Link>
               </NavigationMenuLink>
@@ -81,7 +98,10 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/support" className="text-[10px] tracking-[1.68px] text-black/30">
+                <Link
+                  href="/support"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
                   HELP & SUPPORT
                 </Link>
               </NavigationMenuLink>
@@ -104,14 +124,31 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/account" className="text-[10px] tracking-[1.68px] text-black/30">
+                <Link
+                  href="/account"
+                  className="text-[10px] tracking-[1.68px] text-black/30"
+                >
                   ACCOUNT
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <Button className="bg-black text-white min-w-[64px] h-[23px] rounded-none">
-              <span className="text-[10px] tracking-[1.68px]">BUY</span>
-            </Button>
+            {session.status === "authenticated" ? (
+              <Link href="/dashboard">
+                <Image
+                  src={session.data?.user?.image || ""}
+                  alt="avatar"
+                  width={64}
+                  height={64}
+                  className="rounded-full border border-black/10"
+                />
+              </Link>
+            ) : (
+              <Link href="/auth/signin">
+                <Button className="bg-black text-white min-w-[64px] h-[23px] rounded-none cursor-pointer">
+                  <span className="text-[10px] tracking-[1.68px]">LOGIN</span>
+                </Button>
+              </Link>
+            )}
           </div>
         </ul>
       </NavigationMenu>
