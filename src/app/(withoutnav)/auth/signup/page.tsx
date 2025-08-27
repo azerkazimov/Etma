@@ -11,15 +11,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AuthProps } from "@/features/interface/auth-props";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { signUpSchema } from "../schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface AuthProps {
-  name: string;
-  email: string;
-  password: string;
-}
+
 
 export default function SignUp() {
   const router = useRouter();
@@ -27,7 +26,10 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
-  } = useForm<AuthProps>()
+    formState: { errors },
+  } = useForm<AuthProps>({
+    resolver: zodResolver(signUpSchema),
+  })
 
   const onSubmit = async (data: AuthProps) => {
   
@@ -48,19 +50,9 @@ export default function SignUp() {
       }
 
       // Registration successful, now sign in the user
-      const signInResult = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      });
+      
 
-      if (signInResult?.error) {
-        throw new Error(
-          "Registration successful but login failed. Please try signing in."
-        );
-      }
-
-      router.push("/dashboard");
+      router.push("/auth/signin");
     } catch (error) {
       console.log(error);
     }
