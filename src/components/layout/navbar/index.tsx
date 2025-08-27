@@ -1,19 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import logo from "@/assets/images/logo.png";
+import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import Image from "next/image";
-import { useSession } from "next-auth/react";
 import ProfileButton from "@/features/shared/profile-button";
-import { Sidebar } from "@/features/shared/sidebar";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function Navbar() {
   const session = useSession();

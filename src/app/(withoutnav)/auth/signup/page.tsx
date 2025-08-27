@@ -12,24 +12,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+interface AuthProps {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export default function SignUp() {
   const router = useRouter();
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const {
+    register,
+    handleSubmit,
+  } = useForm<AuthProps>()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: AuthProps) => {
+  
 
     try {
       const response = await fetch("/api/users", {
@@ -37,19 +38,19 @@ export default function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(data),
       });
 
-      const data = await response.json();
+      const user = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Registration failed");
+        throw new Error(user.error || "Registration failed");
       }
 
       // Registration successful, now sign in the user
       const signInResult = await signIn("credentials", {
-        email: form.email,
-        password: form.password,
+        email: data.email,
+        password: data.password,
         redirect: false,
       });
 
@@ -75,30 +76,29 @@ export default function SignUp() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="name">Full Name</Label>
                 <Input
+                  {...register("name")}
                   id="name"
                   name="name"
                   type="text"
                   placeholder="John Doe"
                   required
-                  value={form.name}
-                  onChange={handleChange}
+                 
                 />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  {...register("email")}
                   id="email"
                   name="email"
                   type="email"
                   placeholder="mail@example.com"
                   required
-                  value={form.email}
-                  onChange={handleChange}
                 />
               </div>
               <div className="grid gap-2">
@@ -106,13 +106,12 @@ export default function SignUp() {
                   <Label htmlFor="password">Password</Label>
                 </div>
                 <Input
+                  {...register("password")}
                   id="password"
                   name="password"
                   type="password"
                   placeholder="********"
                   required
-                  value={form.password}
-                  onChange={handleChange}
                 />
               </div>
             </div>
