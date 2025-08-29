@@ -1,0 +1,20 @@
+    {
+        "navbar": {
+            "suplement": "SUPPLEMENT",
+            "laser": "LASER",
+            "reviews": "REVIEWS",
+            "journal": "JOURNAL",
+            "about": "ABOUT",
+            "help_support": "HELP & SUPPORT",
+            "activate": "ACTIVATE",
+            "account": "ACCOUNT"
+        },
+        "main": {
+            "hero": {
+                "title": "THE FUTURE OF WELLNESS.",
+                "description": "The perfect balance of science, nature and technology. Prepare to look and feel your absolute best.",
+                "suplement": "SUPPLEMENT",
+                "laser": "LASER"
+            }
+        }
+    }

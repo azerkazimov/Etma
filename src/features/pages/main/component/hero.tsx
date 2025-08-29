@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
@@ -10,6 +11,7 @@ interface HeroProps {
 }
 
 export default function Hero({ title, description, image }: HeroProps) {
+  const t = useTranslations("main.hero");
   return (
     <div className="flex flex-col items-center justify-center relative w-full h-[100vh]">
       <Image
@@ -30,7 +32,7 @@ export default function Hero({ title, description, image }: HeroProps) {
               variant="outline"
               className="bg-transparent border-white text-white rounded-none min-w-[215px] tracking-[2px] cursor-poiner"
             >
-              SUPPLEMENT
+              {t("suplement")}
             </Button>
           </Link>
           <Link href="/laser">
@@ -38,7 +40,7 @@ export default function Hero({ title, description, image }: HeroProps) {
               variant="outline"
               className="bg-transparent border-white text-white rounded-none min-w-[215px] tracking-[2px] cursor-poiner"
             >
-              LASER
+              {t("laser")}
             </Button>
           </Link>
         </div>

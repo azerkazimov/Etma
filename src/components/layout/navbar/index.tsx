@@ -1,7 +1,7 @@
 "use client";
 
 import logo from "@/assets/images/logo.png";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import {
   NavigationMenu,
@@ -12,9 +12,12 @@ import {
 import ProfileButton from "@/features/shared/profile-button";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import LanguageSwitcher from "@/features/shared/language-switcher";
+import { useTranslations } from "next-intl";
 
 export default function Navbar() {
   const session = useSession();
+  const t = useTranslations("navbar");
 
   console.log(session);
 
@@ -32,7 +35,7 @@ export default function Navbar() {
                   href="/supplement"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  SUPPLEMENT
+                  {t("suplement")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -45,7 +48,7 @@ export default function Navbar() {
                   href="/laser"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  LASER
+                  {t("laser")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -58,7 +61,7 @@ export default function Navbar() {
                   href="/reviews"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  REVIEWS
+                  {t("reviews")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -71,7 +74,7 @@ export default function Navbar() {
                   href="/journal"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  JOURNAL
+                  {t("journal")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -84,7 +87,7 @@ export default function Navbar() {
                   href="/about"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  ABOUT
+                  {t("about")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -102,7 +105,7 @@ export default function Navbar() {
                   href="/support"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  HELP & SUPPORT
+                  {t("help_support")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -115,7 +118,7 @@ export default function Navbar() {
                   href="/activate"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  ACTIVATE
+                  {t("activate")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -128,12 +131,13 @@ export default function Navbar() {
                   href="/account"
                   className="text-[10px] tracking-[1.68px] text-black/30"
                 >
-                  ACCOUNT
+                  {t("account")}
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
 
             <ProfileButton />
+            <LanguageSwitcher />
           </div>
         </ul>
       </NavigationMenu>

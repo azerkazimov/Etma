@@ -4,14 +4,17 @@ import Hero from "@/features/pages/main/component/hero";
 import hero from "@/assets/images/hero.jpg";
 import innovation from "@/assets/images/innovation.jpg";
 import Founder from "@/features/pages/main/component/founder";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+
+  const t = useTranslations("main.hero")
   return (
     <>
       <Hero
         image={hero}
-        title="THE FUTURE OF WELLNESS."
-        description="The perfect balance of science, nature and technology. Prepare to look and feel your absolute best."
+        title={t("title")}
+        description={t("description")}
       />
       <Discover />
       <Banner />

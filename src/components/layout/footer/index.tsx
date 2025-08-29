@@ -6,7 +6,7 @@ import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { PiPinterestLogo } from "react-icons/pi";
 
 export default async function Footer() {
-  const response = await fetch(process.env.API_HOST + "/footer");
+  const response = await fetch(process.env.API_HOST + "/api/footer");
 
   const footer = await response.json();
 
