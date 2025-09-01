@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthProps } from "@/features/interface/auth-props";
+
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInSchema } from "../schema";
+import { SignInSchema, signInSchema } from "../schema";
 
 export default function SignIn() {
   const session = useSession();
@@ -28,13 +28,13 @@ export default function SignIn() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthProps>({
+  } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
   });
 
   console.log(session);
 
-  const onSubmit = async (data: AuthProps) => {
+  const onSubmit = async (data: SignInSchema) => {
     try {
       const response = await fetch("/api/users");
       const users = await response.json();
@@ -46,7 +46,8 @@ export default function SignIn() {
       const signInResult = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: false,
+        redirect: true,
+        redirectTo: "/dashboard",
       });
 
       if (signInResult?.error) {

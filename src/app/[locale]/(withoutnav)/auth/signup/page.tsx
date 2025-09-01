@@ -11,14 +11,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthProps } from "@/features/interface/auth-props";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { signUpSchema } from "../schema";
+import { SignUpSchema, signUpSchema } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-
 
 export default function SignUp() {
   const router = useRouter();
@@ -27,13 +24,11 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthProps>({
+  } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
-  })
+  });
 
-  const onSubmit = async (data: AuthProps) => {
-  
-
+  const onSubmit = async (data: SignUpSchema) => {
     try {
       const response = await fetch("/api/users", {
         method: "POST",
@@ -48,9 +43,6 @@ export default function SignUp() {
       if (!response.ok) {
         throw new Error(user.error || "Registration failed");
       }
-
-      // Registration successful, now sign in the user
-      
 
       router.push("/auth/signin");
     } catch (error) {
@@ -78,9 +70,10 @@ export default function SignUp() {
                   name="name"
                   type="text"
                   placeholder="John Doe"
-                  required
-                 
                 />
+                {errors.name && (
+                  <span className="text-red-500">{errors.name.message}</span>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -90,8 +83,10 @@ export default function SignUp() {
                   name="email"
                   type="email"
                   placeholder="mail@example.com"
-                  required
                 />
+                {errors.email && (
+                  <span className="text-red-500">{errors.email.message}</span>
+                )}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -103,11 +98,33 @@ export default function SignUp() {
                   name="password"
                   type="password"
                   placeholder="********"
-                  required
                 />
+                {errors.password && (
+                  <span className="text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
               </div>
+              <div className="grid gap-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  {...register("confirmPassword")}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="********"
+                />
+                {errors.confirmPassword && (
+                  <span className="text-red-500">
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
+              </div>
+              
             </div>
-            <Button type="submit" className="w-full mt-4">Register</Button>
+            <Button type="submit" className="w-full mt-4 cursor-pointer">
+              Register
+            </Button>
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">

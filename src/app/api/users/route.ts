@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/prisma-client";
 import bcrypt from "bcryptjs";
+import { signUpSchema } from "../../[locale]/(withoutnav)/auth/schema";
 
 export async function GET() {
 
@@ -12,13 +13,22 @@ export async function GET() {
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { name, email, password } = body;
+        
+        // Validate input using Zod schema
+        const validationResult = signUpSchema.safeParse(body);
+        
+        if (!validationResult.success) {
+            return NextResponse.json({ 
+                error: "Validation failed", 
+                details: validationResult.error.issues 
+            }, { status: 400 });
+        }
+
+        const { name, email, password } = validationResult.data;
 
         const existingUser = await prisma.user.findUnique({
             where: { email }
-        })
-
-
+        });
 
         if (existingUser) {
             return NextResponse.json({ error: "User already exists" }, { status: 400 });
@@ -34,12 +44,14 @@ export async function POST(request: NextRequest) {
                 name: name,
                 password: hashedPassword
             }
-        })
+        });
 
-        return NextResponse.json(user);
+        // Return user without password
+        const { password: _, ...userWithoutPassword } = user;
+        return NextResponse.json(userWithoutPassword, { status: 201 });
 
     } catch (error) {
         console.error("Error creating user:", error);
-        return NextResponse.json({ error: "Internal server error " + error }, { status: 500 });
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }
