@@ -26,7 +26,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
           {/* Logo and Title */}
           <div className="flex items-center">
             <Link href="/dashboard" className="text-xl font-bold text-gray-900">
-              Cahan Admin
+              LYMA Admin
             </Link>
           </div>
 
