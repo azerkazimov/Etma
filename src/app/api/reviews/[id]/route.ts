@@ -6,8 +6,23 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const id = parseInt(params.id);
-  const review = await prisma.review.findUnique({ where: { id } });
-  return NextResponse.json(review);
+
+  if (!id || isNaN(id)) {
+    return NextResponse.json({ error: 'Invalid review ID' }, { status: 400 });
+  }
+
+  try {
+    const review = await prisma.review.findUnique({ where: { id } });
+    
+    if (!review) {
+      return NextResponse.json({ error: 'Review not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(review);
+  } catch (error) {
+    console.error("Error fetching review:", error);
+    return NextResponse.json({ error: 'Failed to fetch review' }, { status: 500 });
+  }
 }
 
 export async function PUT(
@@ -24,7 +39,7 @@ export async function PUT(
   try {
     const review = await prisma.review.update({
       where: { id },
-      data: { content, rating },
+      data: { content, rating: String(rating) },
     });
     return NextResponse.json(review);
   } catch (error) {

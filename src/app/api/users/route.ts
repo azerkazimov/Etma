@@ -2,16 +2,27 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/prisma-client";
 import bcrypt from "bcryptjs";
 import { signUpSchema } from "../../[locale]/(withoutnav)/auth/schema";
+import { withRetry, ensureDatabaseConnection } from "../../../lib/db-utils";
 
 export async function GET() {
+    try {
+        await ensureDatabaseConnection();
+        
+        const users = await withRetry(async () => {
+            return await prisma.user.findMany();
+        });
 
-    const users = await prisma.user.findMany();
-
-    return NextResponse.json(users);
+        return NextResponse.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return NextResponse.json({ error: "Failed to fetch users" }, { status: 500 });
+    }
 }
 
 export async function POST(request: NextRequest) {
     try {
+        await ensureDatabaseConnection();
+        
         const body = await request.json();
         
         // Validate input using Zod schema
@@ -26,8 +37,10 @@ export async function POST(request: NextRequest) {
 
         const { name, email, password } = validationResult.data;
 
-        const existingUser = await prisma.user.findUnique({
-            where: { email }
+        const existingUser = await withRetry(async () => {
+            return await prisma.user.findUnique({
+                where: { email }
+            });
         });
 
         if (existingUser) {
@@ -38,12 +51,14 @@ export async function POST(request: NextRequest) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create user
-        const user = await prisma.user.create({
-            data: {
-                email: email,
-                name: name,
-                password: hashedPassword
-            }
+        const user = await withRetry(async () => {
+            return await prisma.user.create({
+                data: {
+                    email: email,
+                    name: name,
+                    password: hashedPassword
+                }
+            });
         });
 
         // Return user without password
